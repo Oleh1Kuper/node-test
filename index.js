@@ -8,7 +8,12 @@ const cookieParser = require('cookie-parser');
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL, methods: ['GET', 'POST', 'PUT', 'DELETE'], }));
+app.use(cors({ 
+  credentials: true, 
+  origin: process.env.CLIENT_BASE_URL, // e.g., https://yourapp.vercel.app
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+}));
 
 console.log(process.env.CLIENT_BASE_URL);
 
@@ -24,7 +29,7 @@ const users = [];
 const sendTokenCookies = (res, accessToken, refreshToken) => {
   const cookieOptions = {
     httpOnly: true,
-    sameSite: 'none', // or 'none' with secure:true in production
+    sameSite: 'lax', // or 'none' with secure:true in production
     secure: true, // set true if using HTTPS
   };
 
