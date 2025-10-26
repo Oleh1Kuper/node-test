@@ -8,7 +8,10 @@ const cookieParser = require('cookie-parser');
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin:  process.env.CLIENT_BASE_URL }));
+app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL, methods: ['GET', 'POST', 'PUT', 'DELETE'], }));
+
+console.log(process.env.CLIENT_BASE_URL);
+
 
 // Configuration
 const ACCESS_TOKEN_SECRET = 'your-access-token-secret-key';
@@ -21,8 +24,8 @@ const users = [];
 const sendTokenCookies = (res, accessToken, refreshToken) => {
   const cookieOptions = {
     httpOnly: true,
-    sameSite: 'lax', // or 'none' with secure:true in production
-    secure: false, // set true if using HTTPS
+    sameSite: 'none', // or 'none' with secure:true in production
+    secure: true, // set true if using HTTPS
   };
 
   // Access token expires quickly
