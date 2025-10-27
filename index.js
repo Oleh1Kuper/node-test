@@ -28,8 +28,9 @@ const users = [];
 const sendTokenCookies = (res, accessToken, refreshToken) => {
   const cookieOptions = {
     httpOnly: true,
-    sameSite: 'lax', // or 'none' with secure:true in production
+    sameSite: 'none', // or 'none' with secure:true in production
     secure: true, // set true if using HTTPS
+    domain: '.123domain.shop',
   };
 
   // Access token expires quickly
