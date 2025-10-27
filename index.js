@@ -17,7 +17,6 @@ app.use(cors({
 
 console.log(process.env.CLIENT_BASE_URL);
 
-
 // Configuration
 const ACCESS_TOKEN_SECRET = 'your-access-token-secret-key';
 const REFRESH_TOKEN_SECRET = 'your-refresh-token-secret-key';
