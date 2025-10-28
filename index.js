@@ -156,6 +156,30 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.post('/logout', authMiddleware, (req, res) => {
+  try {
+    // Clear the authentication cookies
+    res.clearCookie('accessToken', {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      domain: '.123domain.shop',
+    });
+
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      domain: '.123domain.shop',
+    });
+
+    res.json({ message: 'Logout successful' });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({ error: 'Server error during logout' });
+  }
+});
+
 // Refresh token
 app.post('/refresh', (req, res) => {
   const { refreshToken } = req.body;
