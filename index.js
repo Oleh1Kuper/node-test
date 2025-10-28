@@ -144,12 +144,12 @@ app.post('/login', async (req, res) => {
     
     // Generate tokens
     const { accessToken, refreshToken } = generateTokens(user);
-    sendTokenCookies(res, accessToken, refreshToken);
+    // sendTokenCookies(res, accessToken, refreshToken);
     
     res.json({
       message: 'Login successful',
-      // accessToken,
-      // refreshToken
+      accessToken,
+      refreshToken
     });
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
